@@ -305,7 +305,7 @@ def draw_window(surface, grid, score=0, last_score = 0):
 
 def main(win):
     pygame.mixer.music.play(-1)
-    pygame.mixer.music.set_volume(0)
+    pygame.mixer.music.set_volume(0.3)
 
     last_score = max_score()
     locked_positions = {}
@@ -370,7 +370,7 @@ def main(win):
             if not (valid_space(current_piece, grid)):
                 current_piece.rotation -= 1
 
-        if score < 10:
+        if score < 100:
             if Round_1:
                 win.fill((0, 0, 0))
                 draw_text_middle(win, "ROUND 1", 120, (255, 255, 255))
@@ -379,7 +379,7 @@ def main(win):
                 Round_1 = False
             fall_speed = 0.5
 
-        elif score >= 10 and score < 20:
+        elif score >= 100 and score < 200:
             if Round_2:
                 win.fill((0, 0, 0))
                 draw_text_middle(win, "ROUND 2", 120, (255, 255, 255))
@@ -388,7 +388,7 @@ def main(win):
                 Round_2 = False
             fall_speed = 0.25
 
-        elif score >= 20 and score < 30:
+        elif score >= 200 and score < 300:
             if Round_3:
                 win.fill((0, 0, 0))
                 draw_text_middle(win, "ROUND 3", 120, (255, 255, 255))
