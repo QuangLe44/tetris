@@ -408,12 +408,16 @@ def main(win):
                     current_piece.x += 1
             if press[pygame.K_DOWN]:
                 current_piece.y -= press[pygame.K_DOWN]
+                if not (valid_space(current_piece, grid)):
+                    current_piece.y += 1
                 current_piece.rotation += press[pygame.K_DOWN]
                 pygame.time.delay(100)
                 if not (valid_space(current_piece, grid)):
                     current_piece.rotation -= 1
             if press[pygame.K_UP]:
                 current_piece.rotation -= press[pygame.K_UP]
+                if not (valid_space(current_piece, grid)):
+                    current_piece.rotation += 1
                 current_piece.y += press[pygame.K_UP]
                 pygame.time.delay(150)
                 if not (valid_space(current_piece, grid)):
