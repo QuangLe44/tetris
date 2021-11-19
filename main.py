@@ -305,7 +305,7 @@ def draw_window(surface, grid, score=0, last_score = 0):
 
 def main(win):
     pygame.mixer.music.play(-1)
-    pygame.mixer.music.set_volume(0.3)
+    pygame.mixer.music.set_volume(0)
 
     last_score = max_score()
     locked_positions = {}
@@ -370,7 +370,7 @@ def main(win):
             if not (valid_space(current_piece, grid)):
                 current_piece.rotation -= 1
 
-        if score < 100:
+        if score < 10:
             if Round_1:
                 win.fill((0, 0, 0))
                 draw_text_middle(win, "ROUND 1", 120, (255, 255, 255))
@@ -379,7 +379,7 @@ def main(win):
                 Round_1 = False
             fall_speed = 0.5
 
-        elif score >= 100 and score < 200:
+        elif score >= 10 and score < 20:
             if Round_2:
                 win.fill((0, 0, 0))
                 draw_text_middle(win, "ROUND 2", 120, (255, 255, 255))
@@ -388,7 +388,7 @@ def main(win):
                 Round_2 = False
             fall_speed = 0.25
 
-        elif score >= 200 and score < 300:
+        elif score >= 20 and score < 30:
             if Round_3:
                 win.fill((0, 0, 0))
                 draw_text_middle(win, "ROUND 3", 120, (255, 255, 255))
@@ -407,17 +407,18 @@ def main(win):
                 if not (valid_space(current_piece, grid)):
                     current_piece.x += 1
             if press[pygame.K_DOWN]:
-                current_piece.y -= 1
+                current_piece.y -= press[pygame.K_DOWN]
                 current_piece.rotation += press[pygame.K_DOWN]
                 pygame.time.delay(100)
                 if not (valid_space(current_piece, grid)):
                     current_piece.rotation -= 1
             if press[pygame.K_UP]:
-                current_piece.rotation -= 1
+                current_piece.rotation -= press[pygame.K_UP]
                 current_piece.y += press[pygame.K_UP]
                 pygame.time.delay(150)
                 if not (valid_space(current_piece, grid)):
                     current_piece.y -= 1
+
         else:
             pygame.mixer.music.stop()
             pygame.mixer.Sound.play(Win)
