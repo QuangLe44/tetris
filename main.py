@@ -275,7 +275,7 @@ def draw_window(surface, grid, score=0, last_score = 0):
 
     pygame.font.init()
     font = pygame.font.SysFont('comicsans', 80)
-    label = font.render('TETRIS', 1, (150,0,150))
+    label = font.render('TETRIS', 1, (143, 0, 255))
 
     surface.blit(label, (top_left_x + play_width / 2 - (label.get_width() / 2), 30))
 
@@ -294,12 +294,12 @@ def draw_window(surface, grid, score=0, last_score = 0):
 
     surface.blit(label, (sx - 40, sy + 100))
 
-    label = font.render('p = Pause', 1, (204,204,255))
+    label = font.render('Press p to Pause', 1, (204,204,255))
 
     sx = top_left_x - 200
     sy = top_left_y + 200
 
-    surface.blit(label, (sx - 20, sy - 60))
+    surface.blit(label, (sx - 40, sy - 100))
 
     for i in range(len(grid)):
         for j in range(len(grid[i])):
@@ -417,7 +417,8 @@ def main(win):
             elif score >= 100 and score < 200:
                 if Round_2:
                     win.fill((0, 0, 0))
-                    draw_text_middle(win, "ROUND 2", 120, (255, 255, 255),0)
+                    draw_text_middle(win, "ROUND 2", 120, (255, 255, 255),-50)
+                    draw_text_middle(win, "x2 speed", 80, (255, 255, 255), 30)
                     pygame.display.update()
                     pygame.time.delay(1000)
                     Round_2 = False
@@ -426,19 +427,20 @@ def main(win):
             elif score >= 200 and score < 300:
                 if Round_3:
                     win.fill((0, 0, 0))
-                    draw_text_middle(win, "ROUND 3", 120, (255, 255, 255),0)
+                    draw_text_middle(win, "ROUND 3", 120, (255, 255, 255),-50)
+                    draw_text_middle(win, "reverse controls", 80, (255, 255, 255), 30)
                     pygame.display.update()
                     pygame.time.delay(1000)
                     Round_3 = False
                 fall_speed = 0.2
                 if press[pygame.K_LEFT]:
                     current_piece.x += press[pygame.K_LEFT] * 2
-                    pygame.time.delay(80)
+                    pygame.time.delay(75)
                     if not (valid_space(current_piece, grid)):
                         current_piece.x -= 1
                 if press[pygame.K_RIGHT]:
                     current_piece.x -= press[pygame.K_RIGHT] * 2
-                    pygame.time.delay(80)
+                    pygame.time.delay(75)
                     if not (valid_space(current_piece, grid)):
                         current_piece.x += 1
                 if press[pygame.K_DOWN]:
@@ -446,7 +448,7 @@ def main(win):
                     if not (valid_space(current_piece, grid)):
                         current_piece.y += 1
                     current_piece.rotation += press[pygame.K_DOWN]
-                    pygame.time.delay(80)
+                    pygame.time.delay(75)
                     if not (valid_space(current_piece, grid)):
                         current_piece.rotation -= 1
                 if press[pygame.K_UP]:
@@ -454,7 +456,7 @@ def main(win):
                     if not (valid_space(current_piece, grid)):
                         current_piece.rotation += 1
                     current_piece.y += press[pygame.K_UP]
-                    pygame.time.delay(130)
+                    pygame.time.delay(125)
                     if not (valid_space(current_piece, grid)):
                         current_piece.y -= 1
 
