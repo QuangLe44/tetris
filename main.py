@@ -129,7 +129,7 @@ T = [['.....',
       '.....']]
 
 shapes = [S, Z, I, O, J, L, T]
-shape_colors = [(0, 255, 0), (255, 0, 0), (0, 255, 255), (255, 255, 0), (255, 165, 0), (0, 0, 255), (128, 0, 128)]
+shape_colors = [(51, 255, 153), (153, 0, 0), (102, 0, 204), (51, 255, 255), (255, 153, 51), (102, 102, 255), (222, 49, 99)]
 
 
 class Piece(object):
@@ -142,7 +142,7 @@ class Piece(object):
 
 
 def create_grid(locked_pos={}):
-    grid = [[(0,0,0) for _ in range(10)] for _ in range(20)]
+    grid = [[(0,0,0) for n in range(10)] for n in range(20)]
 
     for i in range(len(grid)):
         for j in range(len(grid[i])):
@@ -332,7 +332,6 @@ def main(win):
     score = 0
     RUN = 1
     PAUSE = 0
-
     state = RUN
 
     while run:
