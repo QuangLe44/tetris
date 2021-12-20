@@ -63,6 +63,16 @@ O = [['.....',
       '.00..',
       '.00..',
       '.....']]
+X = [['.....',
+      '.0.0.',
+      '..0..',
+      '.0.0.',
+      '.....'],
+     ['.....',
+      '..0..',
+      '.000.',
+      '..0..',
+      '.....']]
 
 J = [['.....',
       '.0...',
@@ -127,8 +137,8 @@ T = [['.....',
       '..0..',
       '.....']]
 
-shapes = [S, Z, I, O, J, L, T]
-shape_colors = [(51, 255, 153), (153, 0, 0), (102, 0, 204), (51, 255, 255), (255, 153, 51), (102, 102, 255), (222, 49, 99)]
+shapes = [S, Z, I, O, X, J, L, T]
+shape_colors = [(51, 255, 153), (153, 0, 0), (102, 0, 204), (51, 255, 255),(31, 78, 47) ,(255, 153, 51), (102, 102, 255), (222, 49, 99)]
 
 class Piece(object):
     def __init__(self, x, y, shape):
@@ -184,7 +194,7 @@ def ValidSpace(shape, grid):
                 return False
     return True
 
-def check_lost(positions):
+def Lose(positions):
     for pos in positions:
         x, y = pos
         if y < 1:
@@ -315,7 +325,7 @@ def main(win):
     fall_time = 0
     fall_speed = 0.4
     level_time = 0
-    score = 110
+    score = 0
     RUN = 1
     PAUSE = 0
     state = RUN
@@ -474,12 +484,12 @@ def main(win):
             nextshape(next_piece, win)
             pygame.display.update()
 
-            if check_lost(locked_positions):
+            if Lose(locked_positions):
                 pygame.mixer.music.stop()
                 pygame.mixer.Sound.play(End)
                 win.fill((0, 0, 0))
                 win.blit(pygame.transform.scale(endpic, (s_width, s_height)), (0, 0))
-                DrawText(win, "YOU LOSE", 120, (205, 0, 0),0)
+                DrawText(win, "YOU LOST", 120, (205, 0, 0),0)
                 pygame.display.update()
                 pygame.time.delay(5000)
                 run = False
