@@ -25,127 +25,107 @@ block_size = 30
 top_left_x = (s_width - play_width) // 2
 top_left_y = s_height - play_height
 
+S = [['.....',
+      '.....',
+      '..00.',
+      '.00..',
+      '.....'],
+     ['.....',
+      '..0..',
+      '..00.',
+      '...0.',
+      '.....']]
 
-S = [['......',
-      '..000.',
-      '.000..',
-      '......',
-      '......',
-      '......'],
-     ['......',
-      '..0...',
-      '..00..',
-      '..00..',
-      '...0..',
-      '......']]
-
-Z = [['......',
-      '.000..',
-      '..000.',
-      '......',
-      '......',
-      '......'],
-     ['......',
-      '...0..',
-      '..00..',
-      '..00..',
-      '..0...',
-      '......']]
-
-I = [['......',
-      '..0...',
-      '..0...',
-      '..0...',
-      '..0...',
-      '......'],
-     ['......',
-      '......',
-      '.0000.',
-      '......',
-      '......',
-      '......']]
-
-O = [['......',
-      '.000..',
-      '.000..',
-      '.000..',
-      '......',
-      '......']]
-
-J = [['......',
-      '...0..',
-      '...0..',
-      '...0..',
-      '.000..',
-      '......'],
-     ['......',
-      '......',
+Z = [['.....',
+      '.....',
+      '.00..',
+      '..00.',
+      '.....'],
+     ['.....',
+      '..0..',
+      '.00..',
       '.0...',
-      '.0....',
-      '.0000.',
-      '......'],
-     ['......',
-      '..000.',
-      '..0...',
-      '..0...',
-      '..0...',
-      '......'],
-     ['......',
-      '.0000.',
-      '....0.',
-      '....0.',
-      '......',
-      '......']]
+      '.....']]
 
-L = [['......',
-      '..0...',
-      '..0...',
-      '..0...',
-      '..000.',
-      '......'],
-     ['......',
-      '.0000.',
-      '.0....',
-      '.0....',
-      '......',
-      '......'],
-     ['......',
-      '.000..',
-      '...0..',
-      '...0..',
-      '...0..',
-      '......'],
-     ['......',
-      '....0.',
-      '....0.',
-      '.0000.',
-      '......',
-      '......']]
+I = [['..0..',
+      '..0..',
+      '..0..',
+      '..0..',
+      '.....'],
+     ['.....',
+      '0000.',
+      '.....',
+      '.....',
+      '.....']]
 
-T = [['......',
-      '.0000.',
-      '..00..',
-      '......',
-      '......',
-      '......'],
-     ['......',
-      '...0..',
-      '..00..',
-      '..00..',
-      '...0..',
-      '......'],
-     ['......',
-      '..00..',
-      '.0000.',
-      '......',
-      '......',
-      '......'],
-     ['......',
-      '..0...',
-      '..00..',
-      '..00..',
-      '..0...',
-      '......']]
+O = [['.....',
+      '.....',
+      '.00..',
+      '.00..',
+      '.....']]
+
+J = [['.....',
+      '.0...',
+      '.000.',
+      '.....',
+      '.....'],
+     ['.....',
+      '..00.',
+      '..0..',
+      '..0..',
+      '.....'],
+     ['.....',
+      '.....',
+      '.000.',
+      '...0.',
+      '.....'],
+     ['.....',
+      '..0..',
+      '..0..',
+      '.00..',
+      '.....']]
+
+L = [['.....',
+      '...0.',
+      '.000.',
+      '.....',
+      '.....'],
+     ['.....',
+      '..0..',
+      '..0..',
+      '..00.',
+      '.....'],
+     ['.....',
+      '.....',
+      '.000.',
+      '.0...',
+      '.....'],
+     ['.....',
+      '.00..',
+      '..0..',
+      '..0..',
+      '.....']]
+
+T = [['.....',
+      '..0..',
+      '.000.',
+      '.....',
+      '.....'],
+     ['.....',
+      '..0..',
+      '..00.',
+      '..0..',
+      '.....'],
+     ['.....',
+      '.....',
+      '.000.',
+      '..0..',
+      '.....'],
+     ['.....',
+      '..0..',
+      '.00..',
+      '..0..',
+      '.....']]
 
 shapes = [S, Z, I, O, J, L, T]
 shape_colors = [(51, 255, 153), (153, 0, 0), (102, 0, 204), (51, 255, 255), (255, 153, 51), (102, 102, 255), (222, 49, 99)]
@@ -213,7 +193,7 @@ def check_lost(positions):
     return False
 
 def RandShape():
-    return Piece(4, 1, random.choice(shapes))
+    return Piece(5, 1, random.choice(shapes))
 
 def DrawText(surface, text, size, color, y):
     font = pygame.font.SysFont("comicsans", size, bold = True)
@@ -281,7 +261,7 @@ def window(surface, grid, score=0, scorelast = 0):
 
     pygame.font.init()
     font = pygame.font.SysFont('comicsans', 80)
-    label = font.render('TETRIS', 1, (143, 0, 255))
+    label = font.render('Reverse Tetris ', 1, (143, 0, 255))
 
     surface.blit(label, (top_left_x + play_width / 2 - (label.get_width() / 2), 30))
 
@@ -335,7 +315,7 @@ def main(win):
     fall_time = 0
     fall_speed = 0.4
     level_time = 0
-    score = 0
+    score = 110
     RUN = 1
     PAUSE = 0
     state = RUN
@@ -389,81 +369,80 @@ def main(win):
 
             press = pygame.key.get_pressed()
             if press[pygame.K_LEFT]:
-                current_piece.x += press[pygame.K_LEFT]
-                pygame.time.delay(90)
-                if not (ValidSpace(current_piece, grid)):
-                    current_piece.x -= 1
-            if press[pygame.K_RIGHT]:
-                current_piece.x -= press[pygame.K_RIGHT]
+                current_piece.x -= press[pygame.K_LEFT]
                 pygame.time.delay(90)
                 if not (ValidSpace(current_piece, grid)):
                     current_piece.x += 1
-            if press[pygame.K_DOWN]:
-                current_piece.rotation += press[pygame.K_DOWN]
-                pygame.time.delay(140)
+            if press[pygame.K_RIGHT]:
+                current_piece.x += press[pygame.K_RIGHT]
+                pygame.time.delay(90)
                 if not (ValidSpace(current_piece, grid)):
-                    current_piece.rotation -= 1
-            if press[pygame.K_UP]:
-                current_piece.y += press[pygame.K_UP]
+                    current_piece.x -= 1
+            if press[pygame.K_DOWN]:
+                current_piece.y += press[pygame.K_DOWN]
                 pygame.time.delay(90)
                 if not (ValidSpace(current_piece, grid)):
                     current_piece.y -= 1
+            if press[pygame.K_UP]:
+                current_piece.rotation += press[pygame.K_UP]
+                pygame.time.delay(140)
+                if not (ValidSpace(current_piece, grid)):
+                    current_piece.rotation -= 1
 
             if score < 50:
                 if Round_1:
                     win.fill((0, 0, 0))
-                    DrawText(win, "ROUND 1", 120, (255, 255, 255),-50)
-                    DrawText(win, "BIG BLOCKS", 80, (255, 255, 255), 30)
+                    DrawText(win, "ROUND 1", 120, (255, 255, 255),0)
                     pygame.display.update()
                     pygame.time.delay(1000)
                     Round_1 = False
-
-                if press[pygame.K_LEFT]:
-                    current_piece.x -= press[pygame.K_LEFT] * 2
-                    pygame.time.delay(40)
-                    if not (ValidSpace(current_piece, grid)):
-                        current_piece.x += 1
-                if press[pygame.K_RIGHT]:
-                    current_piece.x += press[pygame.K_RIGHT] * 2
-                    pygame.time.delay(40)
-                    if not (ValidSpace(current_piece, grid)):
-                        current_piece.x -= 1
-                if press[pygame.K_DOWN]:
-                    current_piece.rotation -= press[pygame.K_DOWN]
-                    if not (ValidSpace(current_piece, grid)):
-                        current_piece.rotation += 1
-                    current_piece.y += press[pygame.K_DOWN]
-                    pygame.time.delay(30)
-                    if not (ValidSpace(current_piece, grid)):
-                        current_piece.y -= 1
-                if press[pygame.K_UP]:
-                    current_piece.y -= press[pygame.K_DOWN]
-                    if not (ValidSpace(current_piece, grid)):
-                        current_piece.y += 1
-                    current_piece.rotation += press[pygame.K_UP]
-                    pygame.time.delay(90)
-                    if not (ValidSpace(current_piece, grid)):
-                        current_piece.rotation -= 1
+                fall_speed = 0.4
 
             elif score >= 50 and score < 100:
                 if Round_2:
                     win.fill((0, 0, 0))
                     DrawText(win, "ROUND 2", 120, (255, 255, 255),-50)
-                    DrawText(win, "reverse controls", 80, (255, 255, 255), 30)
+                    DrawText(win, "x2 speed", 80, (255, 255, 255), 30)
                     pygame.display.update()
                     pygame.time.delay(1000)
                     Round_2 = False
+                fall_speed = 0.2
 
             elif score >= 100 and score < 200:
                 if Round_3:
                     win.fill((0, 0, 0))
                     DrawText(win, "ROUND 3", 120, (255, 255, 255),-50)
-                    DrawText(win, "x2 speed", 80, (255, 255, 255), 30)
+                    DrawText(win, "reverse controls", 80, (255, 255, 255), 30)
                     pygame.display.update()
                     pygame.time.delay(1000)
                     Round_3 = False
                 fall_speed = 0.2
-
+                if press[pygame.K_LEFT]:
+                    current_piece.x += press[pygame.K_LEFT] * 2
+                    pygame.time.delay(75)
+                    if not (ValidSpace(current_piece, grid)):
+                        current_piece.x -= 1
+                if press[pygame.K_RIGHT]:
+                    current_piece.x -= press[pygame.K_RIGHT] * 2
+                    pygame.time.delay(75)
+                    if not (ValidSpace(current_piece, grid)):
+                        current_piece.x += 1
+                if press[pygame.K_DOWN]:
+                    current_piece.y -= press[pygame.K_DOWN]
+                    if not (ValidSpace(current_piece, grid)):
+                        current_piece.y += 1
+                    current_piece.rotation += press[pygame.K_DOWN]
+                    pygame.time.delay(75)
+                    if not (ValidSpace(current_piece, grid)):
+                        current_piece.rotation -= 1
+                if press[pygame.K_UP]:
+                    current_piece.rotation -= press[pygame.K_UP]
+                    if not (ValidSpace(current_piece, grid)):
+                        current_piece.rotation += 1
+                    current_piece.y += press[pygame.K_UP]
+                    pygame.time.delay(125)
+                    if not (ValidSpace(current_piece, grid)):
+                        current_piece.y -= 1
             else:
                 pygame.mixer.music.stop()
                 pygame.mixer.Sound.play(Win)
@@ -523,5 +502,5 @@ def main_menu(win):
     pygame.display.quit()
 
 win = pygame.display.set_mode((s_width, s_height))
-pygame.display.set_caption('Tetris')
+pygame.display.set_caption('Reverse Tetris')
 main_menu(win)
